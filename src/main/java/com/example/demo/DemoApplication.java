@@ -24,34 +24,34 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner demo(UserRepository repository) {
 		return (args) -> {
-			// save a few customers
-			repository.save(new User("zjam", "zhan", new Date(), new Contact("mal", "mal", 18, "87759697758")));
-			repository.save(new User("zhan", "serik", new Date(), new Contact("mal", "mal", 18, "87759697758")));
+			// save a few users
+//			repository.save(new User("zjam", "zhan", new Date(), new Contact("mal", "mal", 18, "87759697758")));
+//			repository.save(new User("zhan", "serik", new Date(), new Contact("mal", "mal", 18, "87759697758")));
 
 
-			// fetch all customers
-			log.info("Customers found with findAll():");
+			// fetch all Users
+			log.info("User found with findAll():");
 			log.info("-------------------------------");
-			for (User user : repository.findByUsername("zhan")) {
-				log.info(user.toString());
-			}
+			User user  = repository.findByUsername("zhan").get();
+			log.info(user.toString());
+
 			log.info("");
 
-			// fetch an individual customer by ID
-//			User customer = repository.findById(1L);
-//			log.info("Customer found with findById(1L):");
+			// fetch an individual User by ID
+//			User user = repository.findById(1L);
+//			log.info("user found with findById(1):");
 //			log.info("--------------------------------");
-//			log.info(customer.toString());
+//			log.info(user.toString());
 //			log.info("");
 //
-//			// fetch customers by last name
-//			log.info("Customer found with findByLastName('Bauer'):");
+//			// fetch user by last name
+//			log.info("User found with findByLastName('asd'):");
 //			log.info("--------------------------------------------");
-//			repository.findByLastName("Bauer").forEach(bauer -> {
-//				log.info(bauer.toString());
+//			repository.findByLastName("asd").forEach(asd -> {
+//				log.info(asd.toString());
 //			});
-			// for (Customer bauer : repository.findByLastName("Bauer")) {
-			//  log.info(bauer.toString());
+			// for (User asd : repository.findByLastName("asd")) {
+			//  log.info(asd.toString());
 			// }
 			log.info("");
 		};

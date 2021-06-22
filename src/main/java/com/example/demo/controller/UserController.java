@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -17,19 +18,22 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false, name="username") String username) {
-        List<User> users;
-
-        if(username == null){
-            users = userService.findAll();
-        } else {
-            users = userService.findByUsername(username);
-        }
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.findAll();
 
         if(users.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByUsername(@RequestParam(required = false, name="username") String username) {
+        User user = userService.findByUsername(username);
+        if(user != null){
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/user/{id}")
@@ -38,7 +42,7 @@ public class UserController {
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new UserNotFoundException(id);
         }
     }
 
@@ -46,9 +50,9 @@ public class UserController {
     public ResponseEntity<String> createTutorial(@RequestBody User user) {
         try {
             if(user.getContact() != null) {
-                userService.saveOrUpdate(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), user.getContact()));
+                userService.save(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), user.getContact()));
             } else{
-                userService.saveOrUpdate(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), null));
+                userService.save(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), null));
             }
             return new ResponseEntity<>("User created successfully",HttpStatus.CREATED);
         } catch (Exception e) {
@@ -66,10 +70,10 @@ public class UserController {
             user.setPassword(updatedUser.getPassword());
             user.setBirthDate(updatedUser.getBirthDate());
             user.setContact(updatedUser.getContact());
-            userService.saveOrUpdate(user);
+            userService.update(user);
             return new ResponseEntity<>("user updated successfully", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
