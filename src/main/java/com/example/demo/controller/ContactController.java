@@ -59,6 +59,8 @@ public class ContactController {
             contact.setLastName(updatedContact.getLastName());
             contact.setAge(updatedContact.getAge());
             contact.setNumber(updatedContact.getNumber());
+            contact.setAddress(updatedContact.getAddress());
+            contact.setCity(updatedContact.getCity());
             contactService.saveOrUpdate(contact);
             return new ResponseEntity<>( HttpStatus.OK);
         } else {

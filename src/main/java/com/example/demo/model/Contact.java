@@ -22,6 +22,8 @@ public class Contact {
     @Min(value = 0, message = "Age should be greater than 0")
     private Integer age;
     private String number;
+    private String address;
+    private String city;
 
     public Contact() {
     }
@@ -32,6 +34,16 @@ public class Contact {
         this.age = age;
         this.number = number;
     }
+
+    public Contact( String firstName, String lastName, @Min(value = 0, message = "Age should be greater than 0") Integer age, String number, String address, String city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.number = number;
+        this.address = address;
+        this.city = city;
+    }
+
 
     public Integer getId() {
         return id;
@@ -72,14 +84,22 @@ public class Contact {
     public void setNumber(String number) {
         this.number = number;
     }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
 
     @Override

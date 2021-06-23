@@ -47,12 +47,12 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<String> createTutorial(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
             if(user.getContact() != null) {
-                userService.save(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), user.getContact()));
+                userService.save(new User(user.getUsername(), user.getPassword(), user.getEmail(), user.getContact()));
             } else{
-                userService.save(new User(user.getUsername(), user.getPassword(), user.getBirthDate(), null));
+                userService.save(new User(user.getUsername(), user.getPassword(),  user.getEmail(), null));
             }
             return new ResponseEntity<>("User created successfully",HttpStatus.CREATED);
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class UserController {
         if (user != null) {
             user.setUsername(updatedUser.getUsername());
             user.setPassword(updatedUser.getPassword());
-            user.setBirthDate(updatedUser.getBirthDate());
+            user.setEmail(updatedUser.getEmail());
             user.setContact(updatedUser.getContact());
             userService.update(user);
             return new ResponseEntity<>("user updated successfully", HttpStatus.OK);

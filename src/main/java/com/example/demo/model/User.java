@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -16,7 +17,9 @@ public class User {
     private String username;
     private String password;
     private String salt;
-    private Date birthDate;
+    @Email
+    private String email;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private Contact contact;
@@ -24,10 +27,16 @@ public class User {
     public User() {
     }
 
-    public User( @NotEmpty(message = "Username should not be empty") String username, String password, Date birthDate, Contact contact) {
+    public User( @NotEmpty(message = "Username should not be empty") String username, String password, Contact contact) {
         this.username = username;
         this.password = password;
-        this.birthDate = birthDate;
+        this.contact = contact;
+    }
+
+    public User(@NotEmpty(message = "Username should not be empty") String username, String password, @Email String email, Contact contact) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
         this.contact = contact;
     }
 
@@ -55,13 +64,6 @@ public class User {
         this.password = password;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public Contact getContact() {
         return contact;
@@ -79,13 +81,20 @@ public class User {
         this.salt = salt;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", birthDate=" + birthDate +
                 ", contact=" + contact +
                 '}';
     }

@@ -30,10 +30,10 @@ public class DemoApplication {
 
 
 			// fetch all Users
-			log.info("User found with findAll():");
-			log.info("-------------------------------");
-			User user  = repository.findByUsername("zhan").get();
-			log.info(user.toString());
+//			log.info("User found with findAll():");
+//			log.info("-------------------------------");
+//			User user  = repository.findByUsername("zhan").get();
+//			log.info(user.toString());
 
 			log.info("");
 
