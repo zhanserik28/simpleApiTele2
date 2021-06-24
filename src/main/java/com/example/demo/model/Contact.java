@@ -1,11 +1,13 @@
 package com.example.demo.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,30 +22,23 @@ public class Contact {
     @Size(min = 2, max = 30, message = "Last Name should be between 2 and 30 characters")
     private String lastName;
     @Min(value = 0, message = "Age should be greater than 0")
-    private Integer age;
     private String number;
     private String address;
-    private String city;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+    private String gender;
 
     public Contact() {
     }
 
-    public Contact( @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters") String firstName, @Size(min = 2, max = 30, message = "Last Name should be between 2 and 30 characters") String lastName, @Min(value = 0, message = "Age should be greater than 0") Integer age, String number) {
+    public Contact(@Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters") String firstName, @Size(min = 2, max = 30, message = "Last Name should be between 2 and 30 characters") String lastName, @Min(value = 0, message = "Age should be greater than 0") String number, String address, LocalDate date, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
-        this.number = number;
-    }
-
-    public Contact( String firstName, String lastName, @Min(value = 0, message = "Age should be greater than 0") Integer age, String number, String address, String city) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
         this.number = number;
         this.address = address;
-        this.city = city;
+        this.date = date;
+        this.gender = gender;
     }
-
 
     public Integer getId() {
         return id;
@@ -69,14 +64,6 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getNumber() {
         return number;
     }
@@ -93,14 +80,21 @@ public class Contact {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     @Override
     public String toString() {
@@ -108,8 +102,10 @@ public class Contact {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
                 ", number='" + number + '\'' +
+                ", address='" + address + '\'' +
+                ", date=" + date +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

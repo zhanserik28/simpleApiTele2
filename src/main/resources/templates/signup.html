@@ -24,14 +24,26 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputUsername">Username</label>
-                <input type="input" th:field="*{username}"  name="username" class="form-control" id="inputUsername" placeholder="Enter Username" maxlength="20" required>
+                <label for="inputUsername">First Name: </label>
+                <input type="text" th:field="*{username}"  class="form-control" id="inputUsername">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword">Password</label>
-                <input type="password" th:field="*{password}"  name="password" class="form-control" id="inputPassword" placeholder="Enter Password" maxlength="20" required>
+                <label for="inputPassword">Last Name: </label>
+                <input type="text" name="password" class="form-control" id="inputPassword">
             </div>
+
         </div>
+
+<!--        <div class="form-row">-->
+<!--            <div class="form-group col-md-6">-->
+<!--                <label for="inputUsername">Username</label>-->
+<!--                <input type="input" th:field="*{username}"  name="username" class="form-control" id="inputUsername" placeholder="Enter Username" maxlength="20" required>-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-6">-->
+<!--                <label for="inputPassword">Password</label>-->
+<!--                <input type="password" th:field="*{password}"  name="password" class="form-control" id="inputPassword" placeholder="Enter Password" maxlength="20" required>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="form-row">
             <div class="form-group col-md-12">
@@ -41,7 +53,7 @@
         </div>
         <hr>
         <div>
-            <h3 class="">Contact: <span class="badge badge-info">Unnecessary</span></h3>
+            <span class="badge badge-info">Contact: </span>
         </div>
 
 
@@ -65,17 +77,22 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-4">
                 <label for="inputNumber">Number: </label>
                 <input type="text" th:field="*{contact.number}"  class="form-control" id="inputNumber">
             </div>
-            <div class="form-group col-md-5">
-                <label for="inputCity">City</label>
-                <input type="text" th:field="*{contact.city}" class="form-control" id="inputCity">
+            <div class="form-group col-md-4">
+                <label for="inputDate">Birth date: </label>
+                <input type="date" class="datepicker form-control" th:field="*{contact.date}" id="inputDate">
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputAge">Age</label>
-                <input type="text" th:field="*{contact.age}"  class="form-control" id="inputAge">
+
+            <div class="form-group col-md-4">
+                <label for="inputGender">Gender</label>
+                <select id="inputGender" th:field="*{contact.gender}" class="form-control">
+                    <option th:value="unknown" selected>Choose...</option>
+                    <option th:value="Male">Male</option>
+                    <option th:value="Female">Female</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

@@ -57,10 +57,10 @@ public class ContactController {
         if (contact != null) {
             contact.setFirstName(updatedContact.getFirstName());
             contact.setLastName(updatedContact.getLastName());
-            contact.setAge(updatedContact.getAge());
+            contact.setDate(updatedContact.getDate());
             contact.setNumber(updatedContact.getNumber());
             contact.setAddress(updatedContact.getAddress());
-            contact.setCity(updatedContact.getCity());
+            contact.setGender(updatedContact.getGender());
             contactService.saveOrUpdate(contact);
             return new ResponseEntity<>( HttpStatus.OK);
         } else {
